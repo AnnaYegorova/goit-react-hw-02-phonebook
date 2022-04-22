@@ -6,6 +6,7 @@ export class App extends Component {
     name: '',
   };
   nameInputId = nanoid();
+
   handleNameChange = e => {
     this.setState({
       name: e.currentTarget.value,
@@ -20,7 +21,10 @@ export class App extends Component {
   handleSubmit = e => {
     e.preventDefault();
     console.log(this.state);
-    this.setState({ contacts: [this.state.name] });
+    this.setState({
+      contacts: [...this.state.contacts, { name: this.state.name }],
+    });
+    console.log(this.state.contacts.length);
     this.reset();
   };
 
