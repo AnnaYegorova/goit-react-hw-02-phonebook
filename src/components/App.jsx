@@ -24,6 +24,7 @@ export class App extends Component {
     this.setState({
       contacts: [...this.state.contacts, { name: this.state.name }],
     });
+
     console.log(this.state.contacts.length);
     this.reset();
   };
@@ -49,7 +50,11 @@ export class App extends Component {
           <button type="submit">Add contact</button>
         </form>
         <p>Contacts</p>
-        <ul>{}</ul>
+        <ul>
+          {this.state.contacts.map(({ id, name }) => (
+            <li key={id}>{name}</li>
+          ))}
+        </ul>
       </>
     );
   }
