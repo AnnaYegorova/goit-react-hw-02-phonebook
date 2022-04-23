@@ -20,21 +20,26 @@ export class App extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
-    this.setState({
-      contacts: [...this.state.contacts, { name: this.state.name }],
-    });
+    // console.log(this.state);
 
-    console.log(this.state.contacts.length);
+    this.setState(prevState => ({
+      contacts: [
+        ...prevState.contacts,
+        { name: this.state.name, id: nanoid(8) },
+      ],
+    }));
+    // console.log(this.state.contacts.id);
+    // console.log(this.state.contacts.length);
     this.reset();
   };
 
   render() {
+    console.log(this.state.contacts);
     return (
       <>
         <form onSubmit={this.handleSubmit}>
           <p>Phonebook</p>
-          <label htmlFor={this.nameInputId}>
+          <label>
             Name
             <input
               type="text"
@@ -44,15 +49,14 @@ export class App extends Component {
               required
               value={this.state.name}
               onChange={this.handleNameChange}
-              id={this.nameInputId}
             />
           </label>
           <button type="submit">Add contact</button>
         </form>
         <p>Contacts</p>
         <ul>
-          {this.state.contacts.map(({ id, name }) => (
-            <li key={id}>{name}</li>
+          {this.state.contacts.map(contact => (
+            <li key={contact.id}>name:{contact.name}</li>
           ))}
         </ul>
       </>
