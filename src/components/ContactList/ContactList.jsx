@@ -1,23 +1,21 @@
 import propTypes from 'prop-types';
-import {
-  ContactUl,
-  ContactItem,
-  Span,
-  BtnDelete,
-} from '../ContactList/ContactList.styled';
+import { ContactUl, ContactListItem } from '../ContactList/ContactList.styled';
+import { ContactItem } from '../ContactItem/ContactItem';
 export const ContactList = ({ contacts, onDeleteContact }) => {
   return (
     <ContactUl>
-      {contacts.map(({ id, name, number }) => (
-        <ContactItem key={id}>
-          <Span>{name} </Span> : <Span> {number}</Span>
-          <Span>
-            <BtnDelete type="button" onClick={() => onDeleteContact(id)}>
-              Delete
-            </BtnDelete>
-          </Span>
-        </ContactItem>
-      ))}
+      {contacts.map(({ id, name, number }) => {
+        return (
+          <ContactListItem key={id}>
+            <ContactItem
+              id={id}
+              name={name}
+              number={number}
+              onDeleteContact={onDeleteContact}
+            />
+          </ContactListItem>
+        );
+      })}
     </ContactUl>
   );
 };
